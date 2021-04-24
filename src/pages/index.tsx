@@ -8,6 +8,7 @@ import ptBR from 'date-fns/locale/pt-BR'
 import { api } from '../services/api';
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
 import { usePlayer } from '../contexts/PlayerContext';
+import { useTheme } from '../contexts/ThemeContext'
 
 import styles from './home.module.scss'
 
@@ -32,12 +33,15 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   const {playList} = usePlayer()
 
   const episodeList = [...latestEpisodes, ...allEpisodes];
+
+  const {isDark} = useTheme();
   return (
-    <div className={styles.homepage}>
+    <div className={isDark ? styles.darkHomepage : styles.homepage}>
       <Head>
         <title>Home | Podcastr</title>
       </Head>
-      <section className={styles.latestEpisodes}>
+      <section className={isDark ? styles.darkLatestEpisodes : styles.latestEpisodes}>
+      <div className={styles.showPlayerButton} ></div>
         <h2>Últimos lançamentos:</h2>
 
         <ul>
@@ -70,7 +74,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           })}
         </ul>
       </section>
-      <section className={styles.allEpisodes}>
+      <section className={isDark ? styles.darkAllEpisodes : styles.allEpisodes}>
           <h2>Todos os episódios</h2>
 
           <table cellSpacing={0}>

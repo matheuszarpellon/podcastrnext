@@ -11,6 +11,7 @@ import { convertDurationToTimeString } from '../../utils/convertDurationToTimeSt
 
 import styles from './episode.module.scss'
 import { usePlayer } from '../../contexts/PlayerContext';
+import { useTheme } from '../../contexts/ThemeContext'
 
 
 type Episode = {
@@ -31,9 +32,11 @@ type EpisodeProps = {
 
 export default function Episode({ episode }: EpisodeProps) {
   const { play } = usePlayer()
+  const { isDark } = useTheme()
 
   return (
-    <div className={styles.episode}>
+    <div className={isDark ? `${styles.dark} & ${styles.relative}` : styles.relative}>
+    <div className={isDark ? styles.darkEpisode : styles.episode}>
       <Head>
         <title> {episode.title} | Podcastr </title>
       </Head>
@@ -62,6 +65,7 @@ export default function Episode({ episode }: EpisodeProps) {
       </header>
 
       <div className={styles.description} dangerouslySetInnerHTML={{ __html: episode.description }} />
+    </div>
     </div>
   )
 }
