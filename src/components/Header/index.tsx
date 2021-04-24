@@ -1,4 +1,5 @@
 import format from 'date-fns/format'
+import React from 'react'
 import ptBR from 'date-fns/locale/pt-BR'
 
 import styles from './styles.module.scss'
