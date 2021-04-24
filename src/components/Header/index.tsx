@@ -17,8 +17,10 @@ export function Header() {
 
   return (
     <header className={isDark ? styles.darkMode : styles.headerContainer}>
-      <img src="/logo.svg" alt="Podcastr"/>
-      <p>O melhor para você ouvir, sempre</p>
+      <a href="/">
+      <img src="/logo.svg" alt="Podcastr" />
+      </a>
+      <p>O melhor para você ouvir, sempre!</p>
       <span>{currentDate}<CgDarkMode onClick={changeTheme} className={styles.darkModeButton} /></span>
     </header>
   )
