@@ -1,4 +1,5 @@
 .headerContainer {
+  transition: 0.8s;
   background: var(--white);
   height: 6.5rem;
 
@@ -35,6 +36,7 @@
 .darkMode{
   background-color:#191622 ;
   height: 6.5rem;
+  transition: 0.8s;
 
   display: flex;
   align-items: center;
@@ -69,8 +71,4 @@
       top: 0.40rem;     
     }
   }  
-}
-
-@media screen and (max-width: 1080px){
-    
 }

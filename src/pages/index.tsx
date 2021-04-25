@@ -41,7 +41,6 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
         <title>Home | Podcastr</title>
       </Head>
       <section className={isDark ? styles.darkLatestEpisodes : styles.latestEpisodes}>
-      <div className={styles.showPlayerButton} ></div>
         <h2>Últimos lançamentos:</h2>
 
         <ul>
