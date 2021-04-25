@@ -11,6 +11,7 @@ import { convertDurationToTimeString } from '../../utils/convertDurationToTimeSt
 export function Player() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [progress, setProgress] = useState(0)
+  const [volume, setVolume] = useState(.5)
 
   const {episodeList,
         currentEpisodeIndex,
@@ -25,7 +26,9 @@ export function Player() {
         playNext,
         playPrevious,
         hasNext,
-        hasPrevious
+        hasPrevious, 
+        isMuted,
+        setMutedState
       } = usePlayer()
 
   useEffect(() => {
@@ -33,6 +36,7 @@ export function Player() {
       return;
     }
     if (isPlaying) {
+      audioRef.current.volume = volume;
       audioRef.current.play();
     } else {
       audioRef.current.pause();
@@ -40,16 +44,32 @@ export function Player() {
   }, [isPlaying])
 
   function setupProgressListener() {
-    audioRef.current.currentTime = 0;
+    audioRef.current.currentTime = 0
 
     audioRef.current.addEventListener('timeupdate', event => {
-      setProgress(Math.floor(audioRef.current.currentTime));
-    });
+      setProgress(Math.floor(audioRef.current.currentTime))
+    })
   }
 
   function handleSeek(amount: number) {
-    audioRef.current.currentTime = amount;
-    setProgress(amount);
+    audioRef.current.currentTime = amount
+    setProgress(amount)
+  }
+
+  function handleVolume(amount: number) {
+    amount = amount / 100
+    audioRef.current.volume = amount
+    setVolume(amount)
+  }
+
+  function handleMuted() { 
+    setMutedState(true)
+    audioRef.current.volume = 0
+  }
+
+  function handleIsMuted() {
+    setMutedState(false)
+    audioRef.current.volume = volume
   }
 
   function handleEpisodeEnded() {
@@ -152,7 +172,33 @@ export function Player() {
           >
             <img src="/repeat.svg" alt="Repetir"/>
           </button>
-        </div>
+          </div>
+          <div className={styles.volumeController}>
+            { isMuted ? 
+            <button
+            type='button' 
+            onClick={handleIsMuted}
+            disabled={!episode}>
+              <img src="/volume_off.svg" alt="Embaralhar"/>
+            </button> : 
+            <button
+            type='button' 
+            onClick={handleMuted}
+            disabled={!episode}>
+              <img src="/volume_up.svg" alt="Embaralhar"/>
+            </button>
+            }
+
+            <Slider
+            min={0}
+            max={100}
+            value={volume * 100}
+            onChange={handleVolume}
+            trackStyle={{ backgroundColor: '#04d361'}}
+            railStyle={{ backgroundColor: '#9f75ff'}}
+            handleStyle= {{ borderColor: '#04d361', borderWidth: 4}}
+            />
+          </div>
       </footer>
     </div>
   )

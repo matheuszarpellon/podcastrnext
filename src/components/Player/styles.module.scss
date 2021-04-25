@@ -34,9 +34,11 @@
 
 .currentEpisode {
   text-align: center;
+  padding-top: 1.5rem;
 
   img {
     border-radius: 1.5rem;
+    height: 34vh
   }
 
   strong {
@@ -49,6 +51,7 @@
   span {
     display: block;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     opacity: 0.6;
     line-height: 1.5rem
   }
@@ -76,7 +79,7 @@
   font-size: 0.875rem;
 
   span {
-    display: inline;
+    display: inline-block;
     width: 4rem;
     text-align: center;
   }
@@ -136,3 +139,34 @@
     }
   }
 }
+
+.volumeSlider {
+
+}
+
+.volumeController {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  gap: 1.5rem;
+
+  button {
+    background: transparent;
+    border: 0;
+    font-size: 0;
+
+    transition: filter 0.2s;
+
+    &:disabled {
+      opacity: .5;
+      cursor: default;
+    }
+
+    &:hover:not(:disabled) {
+      filter: brightness(0.7);
+    }
+  }
+}
+
