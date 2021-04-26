@@ -35,7 +35,7 @@ export default function Episode({ episode }: EpisodeProps) {
   const { isDark } = useTheme()
 
   return (
-    <div className={isDark ? `${styles.dark} & ${styles.relative}` : styles.relative}>
+    <div className={isDark ? styles.dark : styles.relative}>
     <div className={isDark ? styles.darkEpisode : styles.episode}>
       <Head>
         <title> {episode.title} | Podcastr </title>
